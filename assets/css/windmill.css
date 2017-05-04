@@ -1,0 +1,14 @@
+body {
+	background: #e3f1ff;
+}
+
+.container {
+	margin: 3em auto;
+	position: relative;
+}
+
+.container svg {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}

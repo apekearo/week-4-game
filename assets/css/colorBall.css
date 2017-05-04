@@ -1,0 +1,10 @@
+html, body {
+  background: black;
+  margin: 0;
+  overflow: hidden;
+}
+
+canvas {
+  -webkit-filter: saturate(130%) contrast(120%) brightness(90%) sepia(30%);
+          filter: saturate(130%) contrast(120%) brightness(90%) sepia(30%);
+}
