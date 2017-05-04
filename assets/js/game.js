@@ -68,6 +68,7 @@ characters.Clinton ={
  var clickNum = 0;
  var char1;
  var char2;
+ var characterName;
 
 $(document).ready(function(){
  setUp();
@@ -86,12 +87,12 @@ $(document).ready(function(){
 });
 
 function setUp(){
-	var obamaHealth = $("<p id='Obama'>ObamaHealth " + characters.Obama.health + "</p>");
-	var obamaGolf= $("<img name='Obama' class='clickable' src=" + characters.Obama.picture + ">");
-	var trumpHealth = $("<p id='Trump'>TrumpHealth " + characters.Trump.health + "</p>");
-	var trumpGolf= $("<img name='Trump' class='clickable' src=" + characters.Trump.picture + ">");
-	var clintonHealth = $("<p id='Clinton'>ClintonHealth " + characters.Clinton.health + "</p>");
-	var clintonGolf= $("<img name='Clinton' class='clickable' src=" + characters.Clinton.picture + ">");
+	var obamaHealth = $("<p class='Obama' id='Obama'>ObamaHealth " + characters.Obama.health + "</p>");
+	var obamaGolf= $("<img name='Obama' class='clickable Obama' src=" + characters.Obama.picture + ">");
+	var trumpHealth = $("<p class='Trump' id='Trump'>TrumpHealth " + characters.Trump.health + "</p>");
+	var trumpGolf= $("<img name='Trump' class='clickable Trump' src=" + characters.Trump.picture + ">");
+	var clintonHealth = $("<p class='Clinton' id='Clinton'>ClintonHealth " + characters.Clinton.health + "</p>");
+	var clintonGolf= $("<img name='Clinton' class='clickable Clinton' src=" + characters.Clinton.picture + ">");
 	$("#standby").append([obamaHealth, obamaGolf, trumpHealth, trumpGolf, clintonHealth, clintonGolf]);
 
 	$(".clickable").on('click', function() {
@@ -100,9 +101,10 @@ function setUp(){
 	var attackButton= $("<input type='button' id='attack' value='Attack!!!!'>");
 	attackButton.on('click', function(){
 		attack(char1, char2);
-		counter(char2, char1);
+		
 	});
-	$("#active").append(attackButton)
+	$("#active").append(attackButton);
+	
  // $("#standby").html(characters.health + "Health" + characters.picture) //loop through characterArray, create images with src= picture URL
  // give each of those created images an ID to match character name
 };
@@ -113,22 +115,31 @@ function moveCharacter(characterName) {
 
 	console.log(characterName, characters[characterName].status)
 	clickNum += 1;
+    var destination;
 
 	if(clickNum === 1) {
 		char1 = characters[characterName];
 		characters[characterName].status = 1;
+		destination = 'fighting';
+
 	}else if (clickNum === 2) {
 		char2 = characters[characterName];
 		characters[characterName].status = 2;
 		clickNum = 0;
+		destination = 'defending';
 	}
-
+	movehtml(characterName, destination);
+	// $("#active").after(char1);
+	// $("#defending").after(char2);
 	console.log(characters[characterName].status)
 	//find and remove that picture from one Div
 	//put it in the other one
 	//set 'status' to appropriate code
 	
 	// $("#defending").html(""); //fill in with image from Trump <img src=""> //
+}
+function movehtml(characterName, destination){
+	$('.' + characterName).appendTo('#' + destination)
 }
 
 // attack(characters.Trump, characters.Clinton); inside event
@@ -138,6 +149,9 @@ function moveCharacter(characterName) {
 
 function attack(char1, char2) {
 	char2.health -= char1.attack;
+	char1.health -= char2.attack;
+	console.log(char2.health, char1.health);
+
 	if(char2.health > 0){
 
 		char1.attack+=6;
@@ -151,13 +165,14 @@ function attack(char1, char2) {
 			if($(img).attr('name') == char2.name){
 
 				$(img).replaceWith( "<h2>He's Outta The Game!</h2>" );
+
 			}
 		};
 		
 	}
 
-	$('#' + char1.name).text(char1.health);
-	$('#' + char2.name).text(char2.health);
+	$('#' + char1.name).text(char1.name +"Health"+char1.health);
+	$('#' + char2.name).text(char2.name+"Health"+char2.health);
 	// if char2 health is greater than 0	char1.health -= char2.counter
 	// else		//handle what the game does when character dies
 	// add something to char1.attack+=6
