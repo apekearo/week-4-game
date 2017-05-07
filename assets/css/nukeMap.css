@@ -1,107 +1,133 @@
 @import url(http://fonts.googleapis.com/css?family=Press+Start+2P);
-
-@map-width: 800px;
-@map-height: 400px;
-@small-font: 0.7em;
-
 body {
   background: black;
   color: white;
   font-family: 'Press Start 2P';
   padding: 1em;
 }
-
-#data { display: none; }
-
-#bombs { 
-  width: @map-width;
-  height: @map-height;
+#data {
+  display: none;
+}
+#bombs {
+  width: 800px;
+  height: 400px;
   margin: auto;
   position: relative;
   padding: 1.25em 0;
 }
-
 #stage {
-  background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/49914/bkg_1.png'); 
-  width: @map-width; height: @map-height;
+  background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/49914/bkg_1.png');
+  width: 800px;
+  height: 400px;
   background-size: contain;
 }
-
-#time, #total, .score {
+#time,
+#total,
+.score {
   position: absolute;
 }
-
-@score-width: 8em;
-
-#time, #US, #CP, #FR, #GB { top: 0; }
-
-.score { 
-  font-size: @small-font;
+#time,
+#US,
+#CP,
+#FR,
+#GB {
+  top: 0;
+}
+.score {
+  font-size: 0.7em;
   text-align: left;
   display: block;
 }
-
-#US { left: @score-width * 0; color: #ccf; }
-#CP { left: @score-width * 1; color: #fcc; }
-#GB { left: @score-width * 2; color: #fcf; }
-#FR { left: @score-width * 3; color: #cfc; }
-
-#time { 
-  right: 0;
-  
-  &:before {
-    content: attr(data-month);
-    font-size: @small-font;
-    margin-right: 1em;
-    vertical-align: middle;
-  }
-  
-  &:after {
-    content: attr(data-year);
-    vertical-align: middle;
-  }
+#US {
+  left: 0em;
+  color: #ccf;
 }
-
-#total, #IN, #PC, #IS { bottom: 0; }
-
-#PC { left: @score-width * 0; color: white; }
-#IN { left: @score-width * 1; color: white; }
-#IS { left: @score-width * 2; color: white; }
-
+#CP {
+  left: 8em;
+  color: #fcc;
+}
+#GB {
+  left: 16em;
+  color: #fcf;
+}
+#FR {
+  left: 24em;
+  color: #cfc;
+}
+#time {
+  right: 0;
+}
+#time:before {
+  content: attr(data-month);
+  font-size: 0.7em;
+  margin-right: 1em;
+  vertical-align: middle;
+}
+#time:after {
+  content: attr(data-year);
+  vertical-align: middle;
+}
+#total,
+#IN,
+#PC,
+#IS {
+  bottom: 0;
+}
+#PC {
+  left: 0em;
+  color: white;
+}
+#IN {
+  left: 8em;
+  color: white;
+}
+#IS {
+  left: 16em;
+  color: white;
+}
 #total {
   right: 0;
 }
-
 .score {
   opacity: 0;
   -webkit-transition: opacity 1s;
   transition: opacity 1s;
-  
-  &.active {
-    opacity: 1;
-  }
-
   /* Flags from http://tayles.tumblr.com/post/321497631/flags-css-sprite */
-  &:before {
-    display: inline-block;
-    content: "";
-    width: 16px;
-	  height: 11px;
-	  line-height: 11px;
-	  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/49914/flags_sprite.png) no-repeat;
-    margin-right: 0.5ex;
-  }
-
-  &#US:before { background-position: -64px -187px; }
-  &#CP:before { background-position: -48px -319px; }
-  &#GB:before { background-position: -16px -275px; }
-  &#FR:before { background-position: -16px -253px; }
-  &#PC:before { background-position: 0 -506px; }
-  &#IN:before { background-position: -16px -561px; }
-  &#IS:before { background-position: -16px -550px; }
 }
-
-#total:after, .score:after {
+.score.active {
+  opacity: 1;
+}
+.score:before {
+  display: inline-block;
+  content: "";
+  width: 16px;
+  height: 11px;
+  line-height: 11px;
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/49914/flags_sprite.png) no-repeat;
+  margin-right: 0.5ex;
+}
+.score#US:before {
+  background-position: -64px -187px;
+}
+.score#CP:before {
+  background-position: -48px -319px;
+}
+.score#GB:before {
+  background-position: -16px -275px;
+}
+.score#FR:before {
+  background-position: -16px -253px;
+}
+.score#PC:before {
+  background-position: 0 -506px;
+}
+.score#IN:before {
+  background-position: -16px -561px;
+}
+.score#IS:before {
+  background-position: -16px -550px;
+}
+#total:after,
+.score:after {
   content: attr(data-score);
 }
-

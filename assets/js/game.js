@@ -148,12 +148,11 @@ function movehtml(characterName, destination){
 // cahr1 and char2 are objects  for example obama or trump
 
 function attack(char1, char2) {
-	char2.health -= char1.attack;
-	char1.health -= char2.attack;
-	console.log(char2.health, char1.health);
 
 	if(char2.health > 0){
-
+		char2.health -= char1.attack;
+		char1.health -= char2.attack;
+		console.log(char2.health, char1.health);
 		char1.attack+=6;
 	}
 	else{
